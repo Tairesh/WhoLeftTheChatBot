@@ -1,0 +1,24 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SSH agent
+        run: which ssh-agent || ( apt-get install openssh-client -y )
+      - name: Deploy
+        run: |
+          eval `ssh-agent -s`
+          ssh-add <(echo "${{ secrets.SSH_PRIVATE_KEY }}")
+          mkdir -p ~/.ssh
+          echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+          ssh -t ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_ADDRESS}} "cd ${{ secrets.WORKING_DIR }} && git checkout main && git pull && source venv/bin/activate && pip install -r requirements.txt && sudo systemctl restart ${{ secrets.SERVICE_NAME }}"
