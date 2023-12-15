@@ -85,7 +85,11 @@ class Command(ABC):
                 text = message.text
             else:
                 text = message.content_type
-            self.tgb.db.save_cmd(message.from_user, message.chat if message.chat.type != "private" else None, text)
+            self.tgb.db.save_cmd(
+                message.from_user,
+                message.chat if message.chat.type != "private" else None,
+                text,
+            )
             return func(self, message)
 
         return _save_data

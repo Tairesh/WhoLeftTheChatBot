@@ -22,15 +22,15 @@ def get_atmention(message: Message):
 def chunks(s, n):
     """Produce `n`-long chunks from `s`."""
     for start in range(0, len(s), n):
-        yield s[start: start + n]
+        yield s[start : start + n]
 
 
 def user_name(
-        user: Union[User, DBUser],
-        with_username=False,
-        prefer_username=False,
-        mention=False,
-        mention_type="Markdown",
+    user: Union[User, DBUser],
+    with_username=False,
+    prefer_username=False,
+    mention=False,
+    mention_type="Markdown",
 ):
     if prefer_username and user.username:
         return "@" + user.username
@@ -52,10 +52,24 @@ def user_name(
 
 
 def markdown_escape(text):
-    markdown_entities = ['*', '{', '}', '[', ']', '(', ')', '#', '+', '-', '.', '!', '|']
-    pattern = '|'.join(map(re.escape, markdown_entities))
+    markdown_entities = [
+        "*",
+        "{",
+        "}",
+        "[",
+        "]",
+        "(",
+        ")",
+        "#",
+        "+",
+        "-",
+        ".",
+        "!",
+        "|",
+    ]
+    pattern = "|".join(map(re.escape, markdown_entities))
 
-    return re.sub(pattern, r'\\\g<0>', text)
+    return re.sub(pattern, r"\\\g<0>", text)
 
 
 def escape(text: str):
