@@ -24,7 +24,9 @@ class WhoLeft(Command):
 
         users = self.db.get_left_members(message.chat.id, "-1 day")
         if len(users) == 0:
-            self.bot.reply_to(message, "За последние сутки никто из чата не выходил! " + emoji.HEART)
+            self.bot.reply_to(
+                message, "За последние сутки никто из чата не выходил! " + emoji.HEART
+            )
             return
 
         text = emoji.SAD + "За последние сутки из чата вышли:\n"

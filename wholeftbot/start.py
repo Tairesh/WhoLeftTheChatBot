@@ -52,11 +52,7 @@ def _parse_args():
     )
 
     parser.add_argument(
-        "--token",
-        dest="token",
-        help="Telegram bot token",
-        required=True,
-        default=None
+        "--token", dest="token", help="Telegram bot token", required=True, default=None
     )
 
     parser.add_argument(

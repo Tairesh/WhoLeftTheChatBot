@@ -92,7 +92,9 @@ class Database:
     SQL_CHAT_UPDATE = (
         "UPDATE chats SET type = ?, title = ?, username = ? WHERE chat_id = ?"
     )
-    SQL_CHAT_GET = "SELECT chat_id, type, title, username, created_at FROM chats WHERE chat_id = ?"
+    SQL_CHAT_GET = (
+        "SELECT chat_id, type, title, username, created_at FROM chats WHERE chat_id = ?"
+    )
 
     SQL_CMD_ADD = "INSERT INTO cmd_data (user_id, chat_id, command) VALUES (?, ?, ?)"
     SQL_MEMBER_LEFT_ADD = "INSERT INTO left_member_log (user_id, chat_id) VALUES (?, ?)"
